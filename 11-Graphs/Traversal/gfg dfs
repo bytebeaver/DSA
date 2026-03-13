@@ -1,0 +1,45 @@
+class Solution {
+  public:
+  
+  void DFS(unordered_map<int, vector<int>> &mp, int u, vector<bool> &visited, vector<int> &result )
+  {
+      if(visited[u]==true)
+      return;
+      
+      visited[u]=true;
+      result.push_back(u);
+      
+     for(int &v : mp[u])
+     {
+         if(visited[v]==false)
+         DFS(mp, v , visited, result);
+     }
+  }
+  
+  
+  
+    vector<int> dfs(vector<vector<int>>& adj) {
+        // Code here
+         
+         unordered_map<int ,vector<int>>mp;
+         int V = adj.size();
+         
+         for(int u=0; u<V ; u++)
+         {
+             auto v = adj[u].begin();
+             
+             while(v!=adj[u].end())
+            {
+                mp[u].push_back(*v);
+                v++;
+            }
+         }
+         
+         vector<int> result;
+         vector<bool>visited(V, false);
+         
+         DFS(mp,0,visited,result);
+         
+         return result;
+    }
+};
